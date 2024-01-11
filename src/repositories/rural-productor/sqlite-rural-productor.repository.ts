@@ -25,7 +25,15 @@ export class SQLiteRuralProductorRepository implements RuralProductorRepository 
         throw new Error('Method not implemented.');
     }
 
-    delete() {
-        throw new Error('Method not implemented.');
+    delete(id: number, deletedBy: number) {
+        const newValues = {
+            deletedBy
+        }
+
+        const where = {
+            id, deletedAt: null
+        };
+
+        return database.delete('RuralProductor', newValues, where);
     }
 }

@@ -6,5 +6,5 @@ export interface RuralProductorRepository {
     get(filter: any);
     getById(id: number);
     update();
-    delete();
+    delete(id: number, deletedBy: number);
 }

@@ -1,4 +1,4 @@
-import { createRuralProductorController, getRuralProductorByIdController } from '@utils/dependency.utils';
+import { createRuralProductorController, deleteRuralProductorController, getRuralProductorByIdController } from '@utils/dependency.utils';
 import { Router } from 'express';
 
 export const ruralProductorRoutes = Router();
@@ -14,4 +14,4 @@ ruralProductorRoutes.get('/:id', getRuralProductorByIdController.handle);
 // ruralProductorRoutes.put('/:id', controller.update);
 
 // // ** DELETE **
-// ruralProductorRoutes.delete('/:id', controller.delete);
+ruralProductorRoutes.delete('/:id', deleteRuralProductorController.handle);

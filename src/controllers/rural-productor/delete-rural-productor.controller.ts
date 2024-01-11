@@ -2,11 +2,12 @@ import { STATUS_CODE, STATUS_CODE_CAUSE } from '@utils/constants.utils';
 import { Request, Response } from 'express';
 import { inject, injectable } from 'tsyringe';
 import * as logger from '@logger';
-import { GetRuralProductorByIdUseCase } from '@useCases/rural-productor/get-rural-productor-by-id.use-case';
+import { DeleteRuralProductorUseCase } from '@useCases/rural-productor/delete-rural-productor.use-case';
+
 
 @injectable()
-export class GetRuralProductorByIdController {
-    constructor(@inject('GetRuralProductorByIdUseCase') private useCase: GetRuralProductorByIdUseCase) {
+export class DeleteRuralProductorController {
+    constructor(@inject('DeleteRuralProductorUseCase') private useCase: DeleteRuralProductorUseCase) {
     }
 
     handle = async (req: Request, res: Response) => {
@@ -15,12 +16,12 @@ export class GetRuralProductorByIdController {
 
             if (!id) return res.status(STATUS_CODE.VALIDATION_ERROR).json({ message: `Required param 'id' was not found.` });
 
-            const result = await this.useCase.getById(Number(id));
+            await this.useCase.delete(Number(id), req['sysUserId']);
 
-            return res.status(STATUS_CODE.CREATED).json(result);
+            return res.status(STATUS_CODE.NO_CONTENT).json();
         } catch (error: any) {
             logger.error(error, {
-                origin: 'GetRuralProductorByIdController',
+                origin: 'DeleteRuralProductorController',
                 stack: error.stack,
             });
 

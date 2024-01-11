@@ -6,3 +6,9 @@ export interface CreateRuralProductorDTO {
 }
 
 export interface CreateRuralProductorModelDTO extends CreateRuralProductorDTO, CreateDTO { };
+
+export interface GetRuralProductorByIdUseCaseResponse {
+    id: number;
+    document: string;
+    name: string;
+}

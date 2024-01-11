@@ -6,7 +6,7 @@ import * as logger from '@logger';
 
 @injectable()
 export class CreateRuralProductorController {
-    constructor(@inject('CreateRuralProductorUseCase') private userCase: CreateRuralProductorUseCase) {
+    constructor(@inject('CreateRuralProductorUseCase') private useCase: CreateRuralProductorUseCase) {
     }
 
     handle = async (req: Request, res: Response) => {
@@ -16,7 +16,7 @@ export class CreateRuralProductorController {
             if (!document) return res.status(STATUS_CODE.VALIDATION_ERROR).json({ message: `Required param 'document' was not found.` });
             if (!name) return res.status(STATUS_CODE.VALIDATION_ERROR).json({ message: `Required param 'name' was not found.` });
 
-            const result = await this.userCase.create({ ...req.body, createdBy: req['sysUserId'] });
+            const result = await this.useCase.create({ ...req.body, createdBy: req['sysUserId'] });
 
             return res.status(STATUS_CODE.CREATED).json(result);
         } catch (error: any) {

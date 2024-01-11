@@ -74,8 +74,12 @@ export class SQLiteDatabase {
         throw new Error('Method not implemented.');
     }
 
-    async delete(model: Models, id: number) {
-        throw new Error('Method not implemented.');
+    async delete(model: Models, newValues: any, filter: any) {
+        return this.models[model]?.update({
+            deletedAt: new Date(),
+        }, {
+            where: { ...filter },
+        });
     }
 }
 

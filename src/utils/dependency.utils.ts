@@ -13,11 +13,13 @@ import { AsyncEnvs } from '../config/envs/async-envs';
 import { ConfigService } from '@services/config.service';
 import { ConfigController } from '@controllers/config.controller ';
 import { CreateRuralProductorController } from "@controllers/rural-productor/create-rural-productor.controller";
-import { CreateRuralProductorUseCase } from "src/use-cases/rural-productor/create-rural-productor.use-case";
 import { SQLiteRuralProductorRepository } from "@repositories/rural-productor/sqlite-rural-productor.repository";
 import { LoginController } from "@controllers/login.controller";
 import { GetRuralProductorByIdController } from "@controllers/rural-productor/get-rural-productor-by-id.controller";
-import { GetRuralProductorByIdUseCase } from "src/use-cases/rural-productor/get-rural-productor-by-id.use-case";
+import { DeleteRuralProductorController } from "@controllers/rural-productor/delete-rural-productor.controller";
+import { CreateRuralProductorUseCase } from "@useCases/rural-productor/create-rural-productor.use-case";
+import { GetRuralProductorByIdUseCase } from "@useCases/rural-productor/get-rural-productor-by-id.use-case";
+import { DeleteRuralProductorUseCase } from "@useCases/rural-productor/delete-rural-productor.use-case";
 
 // Singletons
 export const env = container.resolve(Environment);
@@ -34,6 +36,7 @@ container.register<HealthCheckService>('HealthCheckService', { useClass: HealthC
 container.register<ConfigService>('ConfigService', { useClass: ConfigService });
 container.register<CreateRuralProductorUseCase>('CreateRuralProductorUseCase', { useClass: CreateRuralProductorUseCase });
 container.register<GetRuralProductorByIdUseCase>('GetRuralProductorByIdUseCase', { useClass: GetRuralProductorByIdUseCase });
+container.register<DeleteRuralProductorUseCase>('DeleteRuralProductorUseCase', { useClass: DeleteRuralProductorUseCase });
 container.register('RuralProductorRepository', { useClass: SQLiteRuralProductorRepository});
 
 // Resolver as dependências
@@ -41,9 +44,10 @@ export const healthCheckController = container.resolve<HealthCheckController>(He
 export const loginController = container.resolve<LoginController>(LoginController);
 export const configController = container.resolve<ConfigController>(ConfigController);
 
-// Rrual Productor
+// Rural Productor
 export const createRuralProductorController = container.resolve<CreateRuralProductorController>(CreateRuralProductorController);
 export const getRuralProductorByIdController = container.resolve<GetRuralProductorByIdController>(GetRuralProductorByIdController);
+export const deleteRuralProductorController = container.resolve<DeleteRuralProductorController>(DeleteRuralProductorController);
 
 export const dependencies = container;
 
