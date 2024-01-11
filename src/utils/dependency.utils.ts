@@ -7,7 +7,7 @@ import { HealthCheckService } from '@services/healthcheck.service';
 import { LoggerMiddleware } from '@middlewares/logger.middleware';
 import { PublicRoute } from '@routes/public-routes';
 import { Environment } from '../config/envs/environment';
-import { Database } from '../config/database/database';
+import { SQLiteDatabase } from '../config/database/SQLiteDatabase.adapter';
 import { ParameterStore } from './parameter-store.utils';
 import { AsyncEnvs } from '../config/envs/async-envs';
 import { ConfigService } from '@services/config.service';
@@ -16,7 +16,7 @@ import { ConfigController } from '@controllers/config.controller ';
 
 // Singletons
 export const env = container.resolve(Environment);
-export const database = container.resolve(Database);
+export const sqliteDatabase = container.resolve(SQLiteDatabase);
 export const parameterStore = container.resolve(ParameterStore);
 export const asyncEnvs = container.resolve(AsyncEnvs);
 export const loggerMiddleware = container.resolve(LoggerMiddleware);
