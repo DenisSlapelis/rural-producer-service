@@ -2,7 +2,7 @@ import { STATUS_CODE, STATUS_CODE_CAUSE } from '@utils/constants.utils';
 import { Request, Response } from 'express';
 import { inject, injectable } from 'tsyringe';
 import * as logger from '@logger';
-import { GetRuralProductorByIdUseCase } from 'src/use-cases/rural-productor/get-rural-productor-by-id.use-case';
+import { GetRuralProductorByIdUseCase } from '@useCases/rural-productor/get-rural-productor-by-id.use-case';
 
 @injectable()
 export class GetRuralProductorByIdController {

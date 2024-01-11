@@ -20,6 +20,7 @@ const jestConfig: JestConfigWithTsJest = {
         '^@repositories/(.*)$': ["<rootDir>/src/repositories/$1"],
         '^@utils/(.*)$': ["<rootDir>/src/utils/$1"],
         '^@interfaces/(.*)$': ["<rootDir>/src/interfaces/$1"],
+        '^@useCases/(.*)$': ["<rootDir>/src/use-cases/$1"],
     },
     collectCoverageFrom: [
         '<rootDir>/src/repositories/*.ts',

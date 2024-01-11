@@ -1,6 +1,6 @@
 import { STATUS_CODE, STATUS_CODE_CAUSE } from '@utils/constants.utils';
 import { Request, Response } from 'express';
-import { CreateRuralProductorUseCase } from 'src/use-cases/rural-productor/create-rural-productor.use-case';
+import { CreateRuralProductorUseCase } from '@useCases/rural-productor/create-rural-productor.use-case';
 import { inject, injectable } from 'tsyringe';
 import * as logger from '@logger';
 
