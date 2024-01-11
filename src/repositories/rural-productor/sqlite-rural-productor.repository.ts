@@ -18,7 +18,7 @@ export class SQLiteRuralProductorRepository implements RuralProductorRepository 
     }
 
     getById(id: number) {
-        throw new Error('Method not implemented.');
+        return database.findById('RuralProductor', id);
     }
 
     update() {

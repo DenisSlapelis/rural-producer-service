@@ -16,6 +16,8 @@ import { CreateRuralProductorController } from "@controllers/rural-productor/cre
 import { CreateRuralProductorUseCase } from "src/use-cases/rural-productor/create-rural-productor.use-case";
 import { SQLiteRuralProductorRepository } from "@repositories/rural-productor/sqlite-rural-productor.repository";
 import { LoginController } from "@controllers/login.controller";
+import { GetRuralProductorByIdController } from "@controllers/rural-productor/get-rural-productor-by-id.controller";
+import { GetRuralProductorByIdUseCase } from "src/use-cases/rural-productor/get-rural-productor-by-id.use-case";
 
 // Singletons
 export const env = container.resolve(Environment);
@@ -31,6 +33,7 @@ container.register<HealthCheckRepository>('HealthCheckRepository', { useClass: H
 container.register<HealthCheckService>('HealthCheckService', { useClass: HealthCheckService });
 container.register<ConfigService>('ConfigService', { useClass: ConfigService });
 container.register<CreateRuralProductorUseCase>('CreateRuralProductorUseCase', { useClass: CreateRuralProductorUseCase });
+container.register<GetRuralProductorByIdUseCase>('GetRuralProductorByIdUseCase', { useClass: GetRuralProductorByIdUseCase });
 container.register('RuralProductorRepository', { useClass: SQLiteRuralProductorRepository});
 
 // Resolver as dependências
@@ -40,6 +43,7 @@ export const configController = container.resolve<ConfigController>(ConfigContro
 
 // Rrual Productor
 export const createRuralProductorController = container.resolve<CreateRuralProductorController>(CreateRuralProductorController);
+export const getRuralProductorByIdController = container.resolve<GetRuralProductorByIdController>(GetRuralProductorByIdController);
 
 export const dependencies = container;
 

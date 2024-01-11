@@ -61,6 +61,12 @@ console.log('== result: ', result);
         return result?.dataValues;
     }
 
+    async findById(model: Models, id: any) {
+        const result = await this.models[model]?.findByPk(id);
+
+        return result?.dataValues;
+    }
+
     async getById(model: Models, id: number) {
         return this.models[model]?.findByPk(id);
     }
