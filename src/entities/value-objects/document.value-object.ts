@@ -1,24 +1,34 @@
 export class Document {
     private document: string;
-    private readonly CPF_SIZE = 11;
-    private readonly CNPJ_SIZE = 14;
+    private static readonly CPF_SIZE = 11;
+    private static readonly CNPJ_SIZE = 14;
 
-    constructor(document: string) {
-        this.document = this.formatDocumentInput(document);
+    private constructor(document: string) {
+        this.document = document;
     }
 
-    private formatDocumentInput(document: string) {
-        if (!document) throw new Error('Invalid Document', { cause: 'Validation Error' });
+    static create(value: string): Document {
+        this.validate(value);
 
-        this.validateDocument();
+        return new Document(value);
+    }
+
+
+    public get value(): string {
+        return this.formatDocumentOutput();
+    }
+
+
+    static formatDocumentInput(document: string) {
+        if (!document) throw new Error('Invalid Document', { cause: 'Validation Error' });
 
         return document.replaceAll(/[.\-/]/g, '');
     }
 
-    private formatDocumentOutput() {
+    private formatDocumentOutput(): string {
         const formatFunctionBySize = {
-            [this.CPF_SIZE]: this.cpfFormat,
-            [this.CNPJ_SIZE]: this.cnpjFormat,
+            [Document.CPF_SIZE]: this.cpfFormat,
+            [Document.CNPJ_SIZE]: this.cnpjFormat,
         }
 
         const size = this.document.length;
@@ -30,40 +40,38 @@ export class Document {
         return formatFunction();
     }
 
-    private cpfFormat() {
+    private cpfFormat(): string {
         return this.document.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
     }
 
-    private cnpjFormat() {
+    private cnpjFormat(): string {
         return this.document.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, '$1.$2.$3/$4-$5');
     }
 
-    private validateCpf() {
-        // TODO
+    private static validateCpf(document: string): boolean {
+        // TODO: cpf validation
         return true;
     }
 
-    private validateCnpj() {
-        // TODO
+    private static validateCnpj(document: string): boolean {
+        // TODO: cnpj validation
         return true;
     }
 
-    private validateDocument () {
+    static validate(value: string) {
+        const document = this.formatDocumentInput(value);
+
         const validateDocumentBySize = {
             [this.CPF_SIZE]: this.validateCpf,
             [this.CNPJ_SIZE]: this.validateCnpj,
         }
 
-        const size = this.document.length;
+        const size = document.length;
 
         const validateFunction = validateDocumentBySize[size]
 
         if (!validateFunction) throw new Error('Invalid Document', { cause: 'Validation Error' });
 
         return validateFunction();
-    }
-
-    getDocument() {
-        return this.formatDocumentOutput();
     }
 }
