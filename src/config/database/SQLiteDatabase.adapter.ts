@@ -50,7 +50,6 @@ export class SQLiteDatabase {
 
     async findAll(model: Models, options: any) {
         const result = await this.models[model]?.findAll(options);
-console.log('== result: ', result);
 
         return result;
     }
