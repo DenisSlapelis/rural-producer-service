@@ -7,23 +7,17 @@ type Models = 'RuralProductor';
 
 @singleton()
 export class SQLiteDatabase {
-    private readonly database: Sequelize;
+    private database: Sequelize;
     private readonly models: Record<Models, ModelStatic<any> | null>;
 
     constructor() {
-        this.database = this.createDatabase();
+        this.database = new Sequelize({
+            dialect: 'sqlite',
+            storage: './src/config/database/rural_producer_db.sqlite'
+        });
         this.models = {
             RuralProductor: null,
         };
-    }
-
-    private createDatabase() {
-        this.initModels();
-
-        return new Sequelize({
-            dialect: 'sqlite',
-            storage: './src/config/database/SQLiteDatabase.sqlite'
-        });
     }
 
     private initModels() {
@@ -33,32 +27,49 @@ export class SQLiteDatabase {
     }
 
     connect = async () => {
+        this.initModels();
+
         await this.database.sync({ force: true });
 
+        await this.authenticate();
+    };
+
+    authenticate = async () => {
         await this.database.authenticate().catch(err => {
             logger.error(`SEQUELIZE ERROR ON AUTHENTICATE: ${JSON.stringify(err)}`);
 
             throw err;
         });
-    };
-
-    create(model: Models, params: any) {
-        return this.models[model]?.create(params);
     }
 
-    findAll(model: Models) {
-        return this.models[model]?.findAll();
+    async create(model: Models, params: any): Promise<any> {
+        const result = await this.models[model]?.create(params);
+
+        return result?.dataValues;
     }
 
-    getById(model: Models, id: number) {
+    async findAll(model: Models, options: any) {
+        const result = await this.models[model]?.findAll(options);
+console.log('== result: ', result);
+
+        return result;
+    }
+
+    async findOne(model: Models, options: any) {
+        const result = await this.models[model]?.findOne(options);
+
+        return result?.dataValues;
+    }
+
+    async getById(model: Models, id: number) {
         return this.models[model]?.findByPk(id);
     }
 
-    update(model: Models, params: any) {
+    async update(model: Models, params: any) {
         throw new Error('Method not implemented.');
     }
 
-    delete(model: Models, id: number) {
+    async delete(model: Models, id: number) {
         throw new Error('Method not implemented.');
     }
 }

@@ -1,8 +1,7 @@
 import "reflect-metadata";
-import { database } from '@database';
 import { Express } from 'express';
 import { app } from './app';
-import { env } from '@env';
+import { database, env } from '@env';
 import * as logger from '@logger';
 import { showMemory } from "@utils/memory.utils";
 
@@ -10,13 +9,14 @@ const main = async () => {
     logger.warn(JSON.stringify(showMemory()));
 
     await env.populateAllEnvs();
+    await database.connect();
 
-    await database.connect({
-        databaseName: env.getValue('DATABASE_NAME'),
-        host: env.getValue('DATABASE_HOST'),
-        password: env.getValue('DATABASE_PASSWORD'),
-        user: env.getValue('DATABASE_USER'),
-    });
+    // {
+    //     databaseName: env.getValue('DATABASE_NAME'),
+    //     host: env.getValue('DATABASE_HOST'),
+    //     password: env.getValue('DATABASE_PASSWORD'),
+    //     user: env.getValue('DATABASE_USER'),
+    // }
 
     startServer(app, env.getValue('PORT'));
 }

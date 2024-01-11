@@ -7,7 +7,7 @@ export class PublicRoute {
     constructor() {
         this.publicRoutes = {
             '/healthcheck': 'GET',
-            '/api/v1/login': 'POST',
+            '/login': 'POST',
         }
     }
 

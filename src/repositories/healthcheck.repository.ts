@@ -7,7 +7,7 @@ export class HealthCheckRepository {
     }
 
     checkDatabase = async () => {
-        await database.postgreSQL.authenticate();
+        await database.authenticate();
 
         return true;
     }

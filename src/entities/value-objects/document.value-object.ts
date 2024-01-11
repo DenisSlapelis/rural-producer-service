@@ -10,22 +10,20 @@ export class Document {
     static create(value: string): Document {
         this.validate(value);
 
-        return new Document(value);
+        return new Document(this.formatDocumentWithoutMask(value));
     }
-
 
     public get value(): string {
-        return this.formatDocumentOutput();
+        return this.document;
     }
 
-
-    static formatDocumentInput(document: string) {
+    static formatDocumentWithoutMask(document: string) {
         if (!document) throw new Error('Invalid Document', { cause: 'Validation Error' });
 
         return document.replaceAll(/[.\-/]/g, '');
     }
 
-    private formatDocumentOutput(): string {
+    formatDocumentOutputWithMask(): string {
         const formatFunctionBySize = {
             [Document.CPF_SIZE]: this.cpfFormat,
             [Document.CNPJ_SIZE]: this.cnpjFormat,
@@ -40,26 +38,26 @@ export class Document {
         return formatFunction();
     }
 
-    private cpfFormat(): string {
+    private cpfFormat = (): string => {
         return this.document.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
     }
 
-    private cnpjFormat(): string {
+    private cnpjFormat = (): string => {
         return this.document.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, '$1.$2.$3/$4-$5');
     }
 
-    private static validateCpf(document: string): boolean {
+    private static validateCpf = (document: string): boolean => {
         // TODO: cpf validation
         return true;
     }
 
-    private static validateCnpj(document: string): boolean {
+    private static validateCnpj = (document: string): boolean => {
         // TODO: cnpj validation
         return true;
     }
 
     static validate(value: string) {
-        const document = this.formatDocumentInput(value);
+        const document = this.formatDocumentWithoutMask(value);
 
         const validateDocumentBySize = {
             [this.CPF_SIZE]: this.validateCpf,
