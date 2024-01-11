@@ -24,6 +24,7 @@ const jestConfig: JestConfigWithTsJest = {
     },
     collectCoverageFrom: [
         '<rootDir>/src/repositories/*.ts',
+        '<rootDir>/src/use-cases/**/*.ts',
     ],
 }
 

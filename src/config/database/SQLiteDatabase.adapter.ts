@@ -2,11 +2,12 @@ import { ModelStatic, Sequelize } from "sequelize";
 import { singleton } from "tsyringe";
 import * as logger from '@logger';
 import { RuralProductorDB, RuralProductorDBProps } from "./models/sequelize-rural-productor.model";
+import { Database, Models } from "@interfaces/database.interface";
 
-type Models = 'RuralProductor';
+
 
 @singleton()
-export class SQLiteDatabase {
+export class SQLiteDatabase implements Database {
     private database: Sequelize;
     private readonly models: Record<Models, ModelStatic<any> | null>;
 
