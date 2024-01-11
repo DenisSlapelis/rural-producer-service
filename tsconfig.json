@@ -2,7 +2,7 @@
     "$schema": "https://json.schemastore.org/tsconfig",
     "display": "Node 20",
     "_version": "20.9.0",
-    "include": ["src/**/*"],
+    "include": ["src/**/*", "tests/**/*"],
     "exclude": ["node_modules"],
     "compileOnSave": true,
     "compilerOptions": {
@@ -44,7 +44,7 @@
             "@dtos/*": ["./src/dtos/*"],
             "@middlewares/*": ["./src/middlewares/*"],
             "@middlewares": ["./src/middlewares"],
-            "@models/*": ["src/entities/*"],
+            "@entities/*": ["src/entities/*"],
             "@routes/*": ["./src/routes/*"],
             "@services/*": ["./src/services/*"],
             "@repositories/*": ["./src/repositories/*"],
@@ -55,6 +55,7 @@
         // "typeRoots": [],                                  /* Specify multiple folders that act like './node_modules/@types'. */
         "types": [
             "reflect-metadata",
+            "jest",
             "node"
         ] /* Specify type package names to be included without being referenced in a source file. */,
         // "allowUmdGlobalAccess": true,                     /* Allow accessing UMD globals from modules. */
