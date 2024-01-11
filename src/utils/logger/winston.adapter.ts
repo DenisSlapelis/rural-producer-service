@@ -5,11 +5,13 @@ const winstonConsole = new winstonTransport.Console({ level: 'debug' });
 
 export class WinstonAdapter {
     level: any;
+    meta: any;
     transports: any[];
     options: any;
 
-    constructor({ level }) {
+    constructor({ level, meta }) {
         this.level = level || 'info';
+        this.meta = meta || {};
         this.transports = [winstonConsole];
         this.options = this.formatOptions();
     }
@@ -25,7 +27,9 @@ export class WinstonAdapter {
                 }),
                 format.printf((logMessage) => {
                     const { level, timestamp, message } = logMessage;
-                    const fullMessage = `[${timestamp}] - [${level.toLocaleUpperCase()}] ${message}`;
+                    let fullMessage = `[${timestamp}] - [${level.toLocaleUpperCase()}] ${message}`;
+
+                    if (['error', 'debug'].includes(level)) fullMessage += ` ${JSON.stringify(this.meta)}`
 
                     return colorizer.colorize(level, fullMessage);
                 })

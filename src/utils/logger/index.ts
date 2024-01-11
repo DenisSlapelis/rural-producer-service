@@ -1,7 +1,7 @@
 import { WinstonAdapter } from './winston.adapter';
 
 const createLogger = ({ level, meta }) => {
-    const winston = new WinstonAdapter({ level });
+    const winston = new WinstonAdapter({ level, meta });
 
     return winston.getLogger();
 };
