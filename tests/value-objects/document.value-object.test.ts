@@ -5,32 +5,32 @@ describe('Document validator', () => {
         test('Should format in a valid input format (CPF - just numbers)', () => {
             const document = '01648057020';
 
-            expect(Document.formatDocumentInput(document)).toBe('01648057020');
+            expect(Document.formatDocumentWithoutMask(document)).toBe('01648057020');
         });
 
         test('Should format in a valid input format (CPF - other characters)', () => {
             const document = '016.480.570-20';
 
-            expect(Document.formatDocumentInput(document)).toBe('01648057020');
+            expect(Document.formatDocumentWithoutMask(document)).toBe('01648057020');
         });
 
         test('Should format in a valid input format (CNPJ - just numbers)', () => {
             const document = '29468708000153';
 
-            expect(Document.formatDocumentInput(document)).toBe('29468708000153');
+            expect(Document.formatDocumentWithoutMask(document)).toBe('29468708000153');
         });
 
         test('Should format in a valid input format (CNPJ - other characters)', () => {
             const document = '29.468.708/0001-53';
 
-            expect(Document.formatDocumentInput(document)).toBe('29468708000153');
+            expect(Document.formatDocumentWithoutMask(document)).toBe('29468708000153');
         });
 
         test('Should throw an error when value is empty', () => {
             const document = '';
 
             expect(() => {
-                Document.formatDocumentInput(document)
+                Document.formatDocumentWithoutMask(document)
             }).toThrow();
         });
     });
