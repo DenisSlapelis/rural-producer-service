@@ -14,7 +14,7 @@ export class SQLiteDatabaseHelper implements Database {
         this.database = new Sequelize({
             dialect: 'sqlite',
             storage: './src/config/database/rural_producer_db.sqlite',
-            logging: false,
+            logging: console.log,
         });
         this.models = {
             RuralProducer: null,
@@ -33,7 +33,7 @@ export class SQLiteDatabaseHelper implements Database {
     connect = async () => {
         this.initModels();
 
-        // await this.database.sync({ force: true });
+        await this.database.sync();
 
         await this.authenticate();
     };

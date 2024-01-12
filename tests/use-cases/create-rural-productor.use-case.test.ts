@@ -2,22 +2,19 @@ import 'reflect-metadata';
 import { CreateRuralProducerDTO } from "@dtos/rural-producer.dto";
 import { RuralProducer } from "@entities/rural-producer.entity";
 import { CreateRuralProducerUseCase } from "@useCases/rural-producer/create-rural-producer.use-case";
-import { SQLiteRuralProducerRepository } from '@repositories/rural-producer/sqlite-rural-producer.repository';
-import { database } from '@env';
 import { Farm } from '@entities/farm.entity';
-import { SQLiteFarmRepository } from '@repositories/farm/sqlite-farm.repository';
 import { CreateFarmUseCase } from '@useCases/farm/create-farm.use-case';
+import { InMemoryRuralProducerRepository } from '@repositories/rural-producer/inmemory-rural-producer.repository';
+import { InMemoryFarmRepository } from '@repositories/farm/inmemory-farm.repository';
 
 describe('Create rural producer use case', () => {
-    let repository: SQLiteRuralProducerRepository;
-    let farmRepository: SQLiteFarmRepository;
+    let repository: InMemoryRuralProducerRepository;
+    let farmRepository: InMemoryFarmRepository;
     let useCase: CreateRuralProducerUseCase;
     let createFarmUseCase: CreateFarmUseCase;
     let farm: Farm;
 
     beforeAll(async () => {
-        await database.connect();
-
         farm = new Farm({
             name: 'Farm Name',
             city: 'Farm City',
@@ -29,8 +26,8 @@ describe('Create rural producer use case', () => {
     });
 
     beforeEach(() => {
-        repository = new SQLiteRuralProducerRepository();
-        farmRepository = new SQLiteFarmRepository();
+        repository = new InMemoryRuralProducerRepository();
+        farmRepository = new InMemoryFarmRepository();
         createFarmUseCase = new CreateFarmUseCase(farmRepository);
         useCase = new CreateRuralProducerUseCase(repository, createFarmUseCase);
     });

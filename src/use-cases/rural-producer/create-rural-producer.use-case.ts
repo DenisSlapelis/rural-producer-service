@@ -22,11 +22,7 @@ export class CreateRuralProducerUseCase {
     }
 
     private checkIfExists = async (document: string): Promise<void> => {
-        const exists = await this.repository.get({
-            where: {
-                document,
-            }
-        });
+        const exists = await this.repository.get({ document });
 
         if (exists) throw new Error(`Rural Producer already exists (id: ${exists.id}).`, { cause: 'Validation Error' });
     }

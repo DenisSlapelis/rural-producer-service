@@ -8,4 +8,8 @@ export class SQLiteFarmRepository implements FarmRepository {
     create(params: CreateFarmDTO) {
         return database.create('Farm', params);
     }
+
+    getById(id: number) {
+        return database.findById('Farm', id);
+    }
 }

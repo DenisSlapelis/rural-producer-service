@@ -14,7 +14,13 @@ export class SQLiteRuralProducerRepository implements RuralProducerRepository {
     }
 
     get(options: any) {
-        return database.findOne('RuralProducer', options);
+        const filter = {
+            where: {
+                ...options,
+            }
+        }
+
+        return database.findOne('RuralProducer', filter);
     }
 
     getById(id: number) {

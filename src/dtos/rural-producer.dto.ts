@@ -1,5 +1,5 @@
 import { CreateDTO } from "./generic.dto";
-import { CreateFarmDTO } from "./farm.dto";
+import { CreateFarmDTO, GetFarmByIdUseCaseResponse } from "./farm.dto";
 
 export interface CreateRuralProducerParams {
     document: string;
@@ -20,4 +20,5 @@ export interface GetRuralProducerByIdUseCaseResponse {
     id: number;
     document: string;
     name: string;
+    farm: GetFarmByIdUseCaseResponse;
 }

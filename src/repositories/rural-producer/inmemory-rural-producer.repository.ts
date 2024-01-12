@@ -15,7 +15,7 @@ export class InMemoryRuralProducerRepository implements RuralProducerRepository 
         return database.findAll('RuralProducer', options);
     }
 
-    async get(options: any) {
+    get(options: any) {
         const filter = {
             where: {
                 ...options,

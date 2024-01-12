@@ -8,6 +8,7 @@ export class InMemoryDatabase implements Database {
     constructor() {
         this.database = {
             RuralProducer: [],
+            Farm: [],
         };
     }
 
@@ -29,22 +30,22 @@ export class InMemoryDatabase implements Database {
         return id + 1;
     }
 
-    create(model: Models, params: any): Promise<any> {
-        this.database[model].push(params);
+    create(model: Models, params: any): any {
+        const obj = { ...params, id: this.getLastId(model) };
 
-        return { ...params, id: this.getLastId(model) };
+        this.database[model].push(obj);
+
+        return obj;
     }
 
     findAll(model: Models, options: any) {
         throw new Error('Method not implemented.');
     }
 
-    async findOne(model: Models, filter: any) {
+    findOne(model: Models, filter: any) {
         const [key] = Object.keys(filter.where);
 
-        return this.database[model].find(item => {
-            item[key] == filter.where[key]
-        })
+        return this.database[model].find(item => item[key] == filter.where[key]);
     }
 
     findById(model: Models, id: any) {

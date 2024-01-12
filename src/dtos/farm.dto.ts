@@ -10,3 +10,13 @@ export interface CreateFarmDTO {
 }
 
 export interface CreateFarmModelDTO extends CreateFarmDTO, CreateDTO { };
+
+export interface GetFarmByIdUseCaseResponse {
+    id: number;
+    name: string;
+    city: string;
+    state: string;
+    agriculturalArea: number;
+    vegetationArea: number;
+    totalArea: number;
+}
