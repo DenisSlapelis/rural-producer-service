@@ -1,11 +1,13 @@
-import { CreateRuralProductorDTO } from '@dtos/rural-productor.dto';
-import { database } from '@env';
-import { RuralProductorRepository } from 'src/interfaces/rural-productor-repository.interface';
+import { CreateRuralProductorParams } from '@dtos/rural-productor.dto';
+import { dependencies } from '@env';
+import { InMemoryDatabase } from '../../config/database/InMemoryDatabase.adapter';
+import { RuralProductorRepository } from '../../interfaces/rural-productor-repository.interface';
 import { injectable } from "tsyringe";
+const database = dependencies.resolve(InMemoryDatabase);
 
 @injectable()
-export class SQLiteRuralProductorRepository implements RuralProductorRepository {
-    create(params: CreateRuralProductorDTO) {
+export class InMemoryRuralProductorRepository implements RuralProductorRepository {
+    create(params: CreateRuralProductorParams) {
         return database.create('RuralProductor', params);
     }
 
@@ -13,8 +15,14 @@ export class SQLiteRuralProductorRepository implements RuralProductorRepository 
         return database.findAll('RuralProductor', options);
     }
 
-    get(options: any) {
-        return database.findOne('RuralProductor', options);
+    async get(options: any) {
+        const filter = {
+            where: {
+                ...options,
+            }
+        }
+
+        return database.findOne('RuralProductor', filter);
     }
 
     getById(id: number) {

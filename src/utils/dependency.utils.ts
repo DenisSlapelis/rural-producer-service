@@ -17,7 +17,7 @@ import { LoginController } from '@controllers/login.controller';
 // Singletons
 export const env = container.resolve(Environment);
 export const database = container.resolve(SQLiteDatabaseHelper);
-export const SQLiteDatabase = container.resolve(SQLiteDatabaseHelper);
+// export const SQLiteDatabase = container.resolve(SQLiteDatabaseHelper);
 export const parameterStore = container.resolve(ParameterStore);
 export const asyncEnvs = container.resolve(AsyncEnvs);
 export const loggerMiddleware = container.resolve(LoggerMiddleware);

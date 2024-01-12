@@ -9,7 +9,7 @@
     "build": "tsc --p tsconfig.build.json",
     "pretty-quick": "npx pretty-quick --staged --verbose --pattern \"**/*.*(js|ts|json)\"",
     "start:dev": "ts-node-dev -r tsconfig-paths/register --respawn --transpile-only --ignore-watch node_modules src/index.ts",
-    "test": "jest",
+    "test": "jest --verbose",
     "test:coverage": "jest --coverage"
   },
   "author": "Denis Slapelis",
