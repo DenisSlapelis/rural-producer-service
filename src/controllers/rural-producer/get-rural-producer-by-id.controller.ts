@@ -1,11 +1,10 @@
 import { STATUS_CODE, STATUS_CODE_CAUSE } from '@utils/constants.utils';
 import { Request, Response } from 'express';
 import * as logger from '@logger';
-import { DeleteRuralProductorUseCase } from '@useCases/rural-productor/delete-rural-productor.use-case';
+import { GetRuralProducerByIdUseCase } from '@useCases/rural-producer/get-rural-producer-by-id.use-case';
 
-export class DeleteRuralProductorController {
-    constructor(private useCase: DeleteRuralProductorUseCase) {
-    }
+export class GetRuralProducerByIdController {
+    constructor(private useCase: GetRuralProducerByIdUseCase) { }
 
     handle = async (req: Request, res: Response) => {
         try {
@@ -13,12 +12,12 @@ export class DeleteRuralProductorController {
 
             if (!id) return res.status(STATUS_CODE.VALIDATION_ERROR).json({ message: `Required param 'id' was not found.` });
 
-            await this.useCase.delete(Number(id), req['sysUserId']);
+            const result = await this.useCase.getById(Number(id));
 
-            return res.status(STATUS_CODE.NO_CONTENT).json();
+            return res.status(STATUS_CODE.CREATED).json(result);
         } catch (error: any) {
             logger.error(error, {
-                origin: 'DeleteRuralProductorController',
+                origin: 'GetRuralProducerByIdController',
                 stack: error.stack,
             });
 

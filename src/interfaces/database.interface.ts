@@ -1,4 +1,4 @@
-export type Models = 'RuralProductor' | 'Farm';
+export type Models = 'RuralProducer' | 'Farm';
 
 export interface Database {
     connect();

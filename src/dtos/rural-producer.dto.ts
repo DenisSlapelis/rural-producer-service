@@ -1,22 +1,22 @@
 import { CreateDTO } from "./generic.dto";
 import { CreateFarmDTO } from "./farm.dto";
 
-export interface CreateRuralProductorParams {
+export interface CreateRuralProducerParams {
     document: string;
     name: string;
     farm: CreateFarmDTO;
 }
 
-export interface CreateRuralProductorDTO extends CreateRuralProductorParams, CreateDTO {
+export interface CreateRuralProducerDTO extends CreateRuralProducerParams, CreateDTO {
 }
 
-export interface CreateRuralProductorModelDTO extends CreateDTO {
+export interface CreateRuralProducerModelDTO extends CreateDTO {
     document: string;
     name: string;
     farmId: number;
 };
 
-export interface GetRuralProductorByIdUseCaseResponse {
+export interface GetRuralProducerByIdUseCaseResponse {
     id: number;
     document: string;
     name: string;

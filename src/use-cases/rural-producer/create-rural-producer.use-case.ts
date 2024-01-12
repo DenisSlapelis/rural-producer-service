@@ -1,16 +1,16 @@
-import { CreateRuralProductorDTO } from '@dtos/rural-productor.dto';
-import { RuralProductor } from '@entities/rural-productor.entity';
-import { RuralProductorRepository } from '@interfaces/rural-productor-repository.interface';
+import { CreateRuralProducerDTO } from '@dtos/rural-producer.dto';
+import { RuralProducer } from '@entities/rural-producer.entity';
+import { RuralProducerRepository } from '@interfaces/rural-producer-repository.interface';
 import { CreateFarmUseCase } from '@useCases/farm/create-farm.use-case';
 import { injectable } from "tsyringe";
 
 @injectable()
-export class CreateRuralProductorUseCase {
-    constructor(private repository: RuralProductorRepository, private createFarm: CreateFarmUseCase) {
+export class CreateRuralProducerUseCase {
+    constructor(private repository: RuralProducerRepository, private createFarm: CreateFarmUseCase) {
     }
 
-    create = async (params: CreateRuralProductorDTO) => {
-        const instance = new RuralProductor(params);
+    create = async (params: CreateRuralProducerDTO) => {
+        const instance = new RuralProducer(params);
 
         await this.checkIfExists(instance.document.value);
 
@@ -28,10 +28,10 @@ export class CreateRuralProductorUseCase {
             }
         });
 
-        if (exists) throw new Error(`Rural Productor already exists (id: ${exists.id}).`, { cause: 'Validation Error' });
+        if (exists) throw new Error(`Rural Producer already exists (id: ${exists.id}).`, { cause: 'Validation Error' });
     }
 
-    private toModelFormat(instance: RuralProductor, createdBy: number, farmId: number) {
+    private toModelFormat(instance: RuralProducer, createdBy: number, farmId: number) {
         return {
             document: instance.document.value,
             name: instance.name,
@@ -40,7 +40,7 @@ export class CreateRuralProductorUseCase {
         }
     }
 
-    private toResponseFormat(instance: RuralProductor, id: number, farmId: number) {
+    private toResponseFormat(instance: RuralProducer, id: number, farmId: number) {
         return {
             id,
             document: instance.document.formatDocumentOutputWithMask(),

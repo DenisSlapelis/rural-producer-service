@@ -7,7 +7,7 @@ export class InMemoryDatabase implements Database {
 
     constructor() {
         this.database = {
-            RuralProductor: [],
+            RuralProducer: [],
         };
     }
 

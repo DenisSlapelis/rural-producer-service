@@ -1,17 +1,17 @@
 import 'reflect-metadata';
-import { CreateRuralProductorDTO } from "@dtos/rural-productor.dto";
-import { RuralProductor } from "@entities/rural-productor.entity";
-import { CreateRuralProductorUseCase } from "@useCases/rural-productor/create-rural-productor.use-case";
-import { SQLiteRuralProductorRepository } from '@repositories/rural-productor/sqlite-rural-productor.repository';
+import { CreateRuralProducerDTO } from "@dtos/rural-producer.dto";
+import { RuralProducer } from "@entities/rural-producer.entity";
+import { CreateRuralProducerUseCase } from "@useCases/rural-producer/create-rural-producer.use-case";
+import { SQLiteRuralProducerRepository } from '@repositories/rural-producer/sqlite-rural-producer.repository';
 import { database } from '@env';
 import { Farm } from '@entities/farm.entity';
 import { SQLiteFarmRepository } from '@repositories/farm/sqlite-farm.repository';
 import { CreateFarmUseCase } from '@useCases/farm/create-farm.use-case';
 
-describe('Create rural productor use case', () => {
-    let repository: SQLiteRuralProductorRepository;
+describe('Create rural producer use case', () => {
+    let repository: SQLiteRuralProducerRepository;
     let farmRepository: SQLiteFarmRepository;
-    let useCase: CreateRuralProductorUseCase;
+    let useCase: CreateRuralProducerUseCase;
     let createFarmUseCase: CreateFarmUseCase;
     let farm: Farm;
 
@@ -29,15 +29,15 @@ describe('Create rural productor use case', () => {
     });
 
     beforeEach(() => {
-        repository = new SQLiteRuralProductorRepository();
+        repository = new SQLiteRuralProducerRepository();
         farmRepository = new SQLiteFarmRepository();
         createFarmUseCase = new CreateFarmUseCase(farmRepository);
-        useCase = new CreateRuralProductorUseCase(repository, createFarmUseCase);
+        useCase = new CreateRuralProducerUseCase(repository, createFarmUseCase);
     });
 
     describe('toModelFormat', () => {
         test('should format correctly', async () => {
-            const instance = new RuralProductor({
+            const instance = new RuralProducer({
                 document: "01648057020",
                 name: "Test User",
                 farm,
@@ -50,7 +50,7 @@ describe('Create rural productor use case', () => {
                 farmId: 1,
             });
 
-            const instance_2 = new RuralProductor({
+            const instance_2 = new RuralProducer({
                 document: "016.480.570-20",
                 name: "Test User 2",
                 farm,
@@ -67,7 +67,7 @@ describe('Create rural productor use case', () => {
 
     describe('toResponseFormat', () => {
         test('should format correctly', async () => {
-            const instance = new RuralProductor({
+            const instance = new RuralProducer({
                 document: "01648057020",
                 name: "Test User",
                 farm,
@@ -88,7 +88,7 @@ describe('Create rural productor use case', () => {
                 }
             });
 
-            const instance_2 = new RuralProductor({
+            const instance_2 = new RuralProducer({
                 document: "016.480.570-20",
                 name: "Test User 2",
                 farm,
@@ -118,8 +118,8 @@ describe('Create rural productor use case', () => {
     });
 
     describe('create', () => {
-        test('should create new rural productor with complete data', async () => {
-            const newUser: CreateRuralProductorDTO = {
+        test('should create new rural producer with complete data', async () => {
+            const newUser: CreateRuralProducerDTO = {
                 document: "016.480.570-20",
                 name: "Test User",
                 farm,
@@ -144,8 +144,8 @@ describe('Create rural productor use case', () => {
             });
         });
 
-        test('should throw an error if rural productor already exists', async () => {
-            const newUser: CreateRuralProductorDTO = {
+        test('should throw an error if rural producer already exists', async () => {
+            const newUser: CreateRuralProducerDTO = {
                 document: "016.480.570-20",
                 name: "Test User",
                 createdBy: 1,
@@ -158,7 +158,7 @@ describe('Create rural productor use case', () => {
         });
 
         test('should throw an error if document is invalid', async () => {
-            const newUser: CreateRuralProductorDTO = {
+            const newUser: CreateRuralProducerDTO = {
                 document: "123",
                 name: "Test User",
                 createdBy: 1,

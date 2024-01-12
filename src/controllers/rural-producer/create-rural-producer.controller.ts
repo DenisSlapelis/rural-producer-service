@@ -1,12 +1,12 @@
 import { STATUS_CODE, STATUS_CODE_CAUSE } from '@utils/constants.utils';
 import { Request, Response } from 'express';
-import { CreateRuralProductorUseCase } from '@useCases/rural-productor/create-rural-productor.use-case';
+import { CreateRuralProducerUseCase } from '@useCases/rural-producer/create-rural-producer.use-case';
 import { injectable } from 'tsyringe';
 import * as logger from '@logger';
 
 @injectable()
-export class CreateRuralProductorController {
-    constructor(private useCase: CreateRuralProductorUseCase) {
+export class CreateRuralProducerController {
+    constructor(private useCase: CreateRuralProducerUseCase) {
     }
 
     handle = async (req: Request, res: Response) => {
@@ -21,7 +21,7 @@ export class CreateRuralProductorController {
             return res.status(STATUS_CODE.CREATED).json(result);
         } catch (error: any) {
             logger.error(error, {
-                origin: 'CreateRuralProductorController',
+                origin: 'CreateRuralProducerController',
                 stack: error.stack,
             });
 

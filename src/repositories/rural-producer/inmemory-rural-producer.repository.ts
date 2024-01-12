@@ -1,18 +1,18 @@
-import { CreateRuralProductorParams } from '@dtos/rural-productor.dto';
+import { CreateRuralProducerModelDTO } from '@dtos/rural-producer.dto';
 import { dependencies } from '@env';
 import { InMemoryDatabase } from '../../config/database/InMemoryDatabase.adapter';
-import { RuralProductorRepository } from '../../interfaces/rural-productor-repository.interface';
+import { RuralProducerRepository } from '../../interfaces/rural-producer-repository.interface';
 import { injectable } from "tsyringe";
 const database = dependencies.resolve(InMemoryDatabase);
 
 @injectable()
-export class InMemoryRuralProductorRepository implements RuralProductorRepository {
-    create(params: CreateRuralProductorParams) {
-        return database.create('RuralProductor', params);
+export class InMemoryRuralProducerRepository implements RuralProducerRepository {
+    create(params: CreateRuralProducerModelDTO) {
+        return database.create('RuralProducer', params);
     }
 
     list(options: any) {
-        return database.findAll('RuralProductor', options);
+        return database.findAll('RuralProducer', options);
     }
 
     async get(options: any) {
@@ -22,11 +22,11 @@ export class InMemoryRuralProductorRepository implements RuralProductorRepositor
             }
         }
 
-        return database.findOne('RuralProductor', filter);
+        return database.findOne('RuralProducer', filter);
     }
 
     getById(id: number) {
-        return database.findById('RuralProductor', id);
+        return database.findById('RuralProducer', id);
     }
 
     update() {
@@ -42,6 +42,6 @@ export class InMemoryRuralProductorRepository implements RuralProductorRepositor
             id, deletedAt: null
         };
 
-        return database.delete('RuralProductor', newValues, where);
+        return database.delete('RuralProducer', newValues, where);
     }
 }

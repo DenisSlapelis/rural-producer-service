@@ -1,13 +1,13 @@
 import { DataTypes, InferAttributes, InferCreationAttributes, CreationOptional, Model } from 'sequelize';
 
-export interface RuralProductorDB extends Model<InferAttributes<RuralProductorDB>, InferCreationAttributes<RuralProductorDB>> {
+export interface RuralProducerDB extends Model<InferAttributes<RuralProducerDB>, InferCreationAttributes<RuralProducerDB>> {
     id: CreationOptional<number>;
     document: string;
     name: string;
     farmId: number;
 }
 
-export const RuralProductorDBProps = {
+export const RuralProducerDBProps = {
     id: {
         type: DataTypes.INTEGER,
         allowNull: false,

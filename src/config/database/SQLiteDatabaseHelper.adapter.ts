@@ -1,7 +1,7 @@
 import { ModelStatic, Sequelize } from "sequelize";
 import { singleton } from "tsyringe";
 import * as logger from '@logger';
-import { RuralProductorDB, RuralProductorDBProps } from "./models/sequelize-rural-productor.model";
+import { RuralProducerDB, RuralProducerDBProps } from "./models/sequelize-rural-producer.model";
 import { Database, Models } from "@interfaces/database.interface";
 import { FarmDB, FarmDBProps } from "./models/sequelize-farm.model";
 
@@ -17,23 +17,23 @@ export class SQLiteDatabaseHelper implements Database {
             logging: false,
         });
         this.models = {
-            RuralProductor: null,
+            RuralProducer: null,
             Farm: null,
         };
     }
 
     private initModels() {
-        const RuralProductor = this.database.define<RuralProductorDB>('RuralProductor', RuralProductorDBProps, { tableName: 'rural_productors', paranoid: true, underscored: true });
+        const RuralProducer = this.database.define<RuralProducerDB>('RuralProducer', RuralProducerDBProps, { tableName: 'rural_producers', paranoid: true, underscored: true });
         const Farm = this.database.define<FarmDB>('Farm', FarmDBProps, { tableName: 'farms', paranoid: true, underscored: true });
 
-        this.models.RuralProductor = RuralProductor;
+        this.models.RuralProducer = RuralProducer;
         this.models.Farm = Farm;
     }
 
     connect = async () => {
         this.initModels();
 
-        await this.database.sync({ force: true });
+        // await this.database.sync({ force: true });
 
         await this.authenticate();
     };
