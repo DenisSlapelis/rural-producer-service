@@ -37,7 +37,14 @@ describe('Create rural producer use case', () => {
             const instance = new RuralProducer({
                 document: "01648057020",
                 name: "Test User",
-                farm,
+                farm: {
+                    name: farm.name,
+                    city: farm.city,
+                    state: farm.state,
+                    agriculturalArea: farm.agriculturalArea,
+                    vegetationArea: farm.vegetationArea,
+                    totalArea: farm.totalArea.value,
+                },
             });
 
             expect(useCase['toModelFormat'](instance, 1, 1)).toEqual({
@@ -50,7 +57,14 @@ describe('Create rural producer use case', () => {
             const instance_2 = new RuralProducer({
                 document: "016.480.570-20",
                 name: "Test User 2",
-                farm,
+                farm: {
+                    name: farm.name,
+                    city: farm.city,
+                    state: farm.state,
+                    agriculturalArea: farm.agriculturalArea,
+                    vegetationArea: farm.vegetationArea,
+                    totalArea: farm.totalArea.value,
+                },
             });
 
             expect(useCase['toModelFormat'](instance_2, 2, 2)).toEqual({
@@ -67,7 +81,14 @@ describe('Create rural producer use case', () => {
             const instance = new RuralProducer({
                 document: "01648057020",
                 name: "Test User",
-                farm,
+                farm: {
+                    name: farm.name,
+                    city: farm.city,
+                    state: farm.state,
+                    agriculturalArea: farm.agriculturalArea,
+                    vegetationArea: farm.vegetationArea,
+                    totalArea: farm.totalArea.value,
+                },
             });
 
             expect(useCase['toResponseFormat'](instance, 1, 1)).toStrictEqual({
@@ -88,7 +109,14 @@ describe('Create rural producer use case', () => {
             const instance_2 = new RuralProducer({
                 document: "016.480.570-20",
                 name: "Test User 2",
-                farm,
+                farm: {
+                    name: farm.name,
+                    city: farm.city,
+                    state: farm.state,
+                    agriculturalArea: farm.agriculturalArea,
+                    vegetationArea: farm.vegetationArea,
+                    totalArea: farm.totalArea.value,
+                },
             });
 
             expect(useCase['toResponseFormat'](instance_2, 2, 2)).toStrictEqual({
@@ -119,7 +147,14 @@ describe('Create rural producer use case', () => {
             const newUser: CreateRuralProducerDTO = {
                 document: "016.480.570-20",
                 name: "Test User",
-                farm,
+                farm: {
+                    name: farm.name,
+                    city: farm.city,
+                    state: farm.state,
+                    agriculturalArea: farm.agriculturalArea,
+                    vegetationArea: farm.vegetationArea,
+                    totalArea: farm.totalArea.value,
+                },
                 createdBy: 1,
             };
 
@@ -146,7 +181,14 @@ describe('Create rural producer use case', () => {
                 document: "016.480.570-20",
                 name: "Test User",
                 createdBy: 1,
-                farm,
+                farm: {
+                    name: farm.name,
+                    city: farm.city,
+                    state: farm.state,
+                    agriculturalArea: farm.agriculturalArea,
+                    vegetationArea: farm.vegetationArea,
+                    totalArea: farm.totalArea.value,
+                },
             };
 
             expect(async () => {
@@ -159,7 +201,14 @@ describe('Create rural producer use case', () => {
                 document: "123",
                 name: "Test User",
                 createdBy: 1,
-                farm,
+                farm: {
+                    name: farm.name,
+                    city: farm.city,
+                    state: farm.state,
+                    agriculturalArea: farm.agriculturalArea,
+                    vegetationArea: farm.vegetationArea,
+                    totalArea: farm.totalArea.value,
+                },
             };
 
             expect(async () => {

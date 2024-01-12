@@ -41,7 +41,15 @@ export class CreateRuralProducerUseCase {
             id,
             document: instance.document.formatDocumentOutputWithMask(),
             name: instance.name,
-            farm: { id: farmId, ...instance.farm },
+            farm: {
+                id: farmId,
+                name: instance.farm.name,
+                city: instance.farm.city,
+                state: instance.farm.state,
+                agriculturalArea: instance.farm.agriculturalArea,
+                vegetationArea: instance.farm.vegetationArea,
+                totalArea: instance.farm.totalArea.value,
+            },
         }
     }
 }

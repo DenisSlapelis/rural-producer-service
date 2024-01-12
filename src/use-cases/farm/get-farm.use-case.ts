@@ -27,7 +27,7 @@ export class GetFarmUseCase {
             state: instance.state,
             agriculturalArea: instance.agriculturalArea,
             vegetationArea: instance.vegetationArea,
-            totalArea: instance.totalArea,
+            totalArea: instance.totalArea.value,
         }
     }
 }
