@@ -4,17 +4,16 @@ import * as logger from '@logger';
 import { RuralProductorDB, RuralProductorDBProps } from "./models/sequelize-rural-productor.model";
 import { Database, Models } from "@interfaces/database.interface";
 
-
-
 @singleton()
-export class SQLiteDatabase implements Database {
+export class SQLiteDatabaseHelper implements Database {
     private database: Sequelize;
     private readonly models: Record<Models, ModelStatic<any> | null>;
 
     constructor() {
         this.database = new Sequelize({
             dialect: 'sqlite',
-            storage: './src/config/database/rural_producer_db.sqlite'
+            storage: './src/config/database/rural_producer_db.sqlite',
+            logging: false,
         });
         this.models = {
             RuralProductor: null,

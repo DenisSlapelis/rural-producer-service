@@ -1,13 +1,10 @@
 import { STATUS_CODE, STATUS_CODE_CAUSE } from '@utils/constants.utils';
 import { Request, Response } from 'express';
-import { inject, injectable } from 'tsyringe';
 import * as logger from '@logger';
 import { GetRuralProductorByIdUseCase } from '@useCases/rural-productor/get-rural-productor-by-id.use-case';
 
-@injectable()
 export class GetRuralProductorByIdController {
-    constructor(@inject('GetRuralProductorByIdUseCase') private useCase: GetRuralProductorByIdUseCase) {
-    }
+    constructor(private useCase: GetRuralProductorByIdUseCase) { }
 
     handle = async (req: Request, res: Response) => {
         try {

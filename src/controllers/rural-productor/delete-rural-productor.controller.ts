@@ -1,13 +1,10 @@
 import { STATUS_CODE, STATUS_CODE_CAUSE } from '@utils/constants.utils';
 import { Request, Response } from 'express';
-import { inject, injectable } from 'tsyringe';
 import * as logger from '@logger';
 import { DeleteRuralProductorUseCase } from '@useCases/rural-productor/delete-rural-productor.use-case';
 
-
-@injectable()
 export class DeleteRuralProductorController {
-    constructor(@inject('DeleteRuralProductorUseCase') private useCase: DeleteRuralProductorUseCase) {
+    constructor(private useCase: DeleteRuralProductorUseCase) {
     }
 
     handle = async (req: Request, res: Response) => {

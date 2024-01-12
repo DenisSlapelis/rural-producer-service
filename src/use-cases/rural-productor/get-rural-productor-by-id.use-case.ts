@@ -2,12 +2,9 @@ import { GetRuralProductorByIdUseCaseResponse } from '@dtos/rural-productor.dto'
 import { RuralProductor } from '@entities/rural-productor.entity';
 import { IGetRuralProductorByIdUseCase } from '@interfaces/get-rural-productor-by-id-use-case.interface';
 import { RuralProductorRepository } from '@interfaces/rural-productor-repository.interface';
-import { inject, injectable } from "tsyringe";
 
-@injectable()
 export class GetRuralProductorByIdUseCase implements IGetRuralProductorByIdUseCase {
-    constructor(@inject('RuralProductorRepository') private repository: RuralProductorRepository) {
-    }
+    constructor(private repository: RuralProductorRepository) { }
 
     getById = async (id: number): Promise<GetRuralProductorByIdUseCaseResponse> => {
         const result = await this.repository.getById(id);

@@ -1,17 +1,17 @@
-import { createRuralProductorController, deleteRuralProductorController, getRuralProductorByIdController } from '@utils/dependency.utils';
 import { Router } from 'express';
+import { makeCreateRuralProductorController, makeDeleteRuralProductorController, makeGetRuralProductorByIdController } from 'src/factories/rural-productor.factory';
 
 export const ruralProductorRoutes = Router();
 
 // ** POST **
-ruralProductorRoutes.post('/', createRuralProductorController.handle);
+ruralProductorRoutes.post('/', makeCreateRuralProductorController().handle);
 
 // // ** GET **
 // ruralProductorRoutes.get('/', controller.list);
-ruralProductorRoutes.get('/:id', getRuralProductorByIdController.handle);
+ruralProductorRoutes.get('/:id', makeGetRuralProductorByIdController().handle);
 
 // // ** PUT **
 // ruralProductorRoutes.put('/:id', controller.update);
 
 // // ** DELETE **
-ruralProductorRoutes.delete('/:id', deleteRuralProductorController.handle);
+ruralProductorRoutes.delete('/:id', makeDeleteRuralProductorController().handle);

@@ -1,11 +1,11 @@
 import { CreateRuralProductorModelDTO } from '@dtos/rural-productor.dto';
 import { RuralProductor } from '@entities/rural-productor.entity';
 import { RuralProductorRepository } from '@interfaces/rural-productor-repository.interface';
-import { inject, injectable } from "tsyringe";
+import { injectable } from "tsyringe";
 
 @injectable()
 export class CreateRuralProductorUseCase {
-    constructor(@inject('RuralProductorRepository') private repository: RuralProductorRepository) {
+    constructor(private repository: RuralProductorRepository) {
     }
 
     create = async (params: CreateRuralProductorModelDTO) => {
@@ -18,7 +18,7 @@ export class CreateRuralProductorUseCase {
         return this.toResponseFormat(instance, id);
     }
 
-    private async checkIfExists(document: string) {
+    private checkIfExists = async (document: string): Promise<void> => {
         const exists = await this.repository.get({
             where: {
                 document,

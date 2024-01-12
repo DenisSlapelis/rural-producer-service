@@ -1,12 +1,10 @@
 import { RuralProductorRepository } from '@interfaces/rural-productor-repository.interface';
-import { inject, injectable } from "tsyringe";
 import { GetRuralProductorByIdUseCase } from './get-rural-productor-by-id.use-case';
 
-@injectable()
 export class DeleteRuralProductorUseCase {
     constructor(
-        @inject('RuralProductorRepository') private repository: RuralProductorRepository,
-        @inject('GetRuralProductorByIdUseCase') private geByIdUseCase: GetRuralProductorByIdUseCase
+        private repository: RuralProductorRepository,
+        private geByIdUseCase: GetRuralProductorByIdUseCase
     ) {
     }
 
