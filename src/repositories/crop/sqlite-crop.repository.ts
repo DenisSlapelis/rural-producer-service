@@ -1,6 +1,6 @@
 import { database } from '@env';
 import { injectable } from "tsyringe";
-import { CropRepository } from '@interfaces/crop.interface';
+import { CropRepository } from '@interfaces/crop-repository.interface';
 import _ from 'lodash';
 import { Op } from 'sequelize';
 

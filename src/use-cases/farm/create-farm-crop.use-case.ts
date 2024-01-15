@@ -1,5 +1,5 @@
 import { Crop } from '@entities/crop.entity';
-import { CropRepository } from '@interfaces/crop.interface';
+import { CropRepository } from '@interfaces/crop-repository.interface';
 import { FarmRepository } from '@interfaces/farm-repository.interface';
 import { injectable } from "tsyringe";
 

@@ -1,7 +1,7 @@
 import { dependencies } from '@env';
 import { InMemoryDatabase } from '../../config/database/InMemoryDatabase.adapter';
 import { injectable } from "tsyringe";
-import { CropRepository } from '@interfaces/crop.interface';
+import { CropRepository } from '@interfaces/crop-repository.interface';
 const database = dependencies.resolve(InMemoryDatabase);
 
 @injectable()

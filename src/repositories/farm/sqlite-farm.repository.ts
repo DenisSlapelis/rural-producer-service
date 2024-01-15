@@ -3,7 +3,7 @@ import { database } from '@env';
 import { FarmRepository } from 'src/interfaces/farm-repository.interface';
 import _ from 'lodash';
 import { Crop } from '@entities/crop.entity';
-import { CropRepository } from '@interfaces/crop.interface';
+import { CropRepository } from '@interfaces/crop-repository.interface';
 
 export class SQLiteFarmRepository implements FarmRepository {
     constructor(private readonly cropRepository: CropRepository) {}
