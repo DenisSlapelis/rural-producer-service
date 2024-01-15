@@ -1,4 +1,4 @@
-import { ModelStatic, Sequelize } from "sequelize";
+import { CountOptions, ModelStatic, Sequelize } from "sequelize";
 import { singleton } from "tsyringe";
 import * as logger from '@logger';
 import { RuralProducerDB, RuralProducerDBProps } from "./models/sequelize-rural-producer.model";
@@ -31,6 +31,9 @@ export class SQLiteDatabaseHelper implements Database {
         const Farm = this.database.define<FarmDB>('Farm', FarmDBProps, { tableName: 'farms', paranoid: true, underscored: true });
         const Crop = this.database.define<CropDB>('Crop', CropDBProps, { tableName: 'crops', paranoid: true, underscored: true });
         const FarmCrop = this.database.define<FarmCropDB>('FarmCrop', FarmCropDBProps, { tableName: 'farm_crops', paranoid: true, underscored: true });
+
+        FarmCrop.belongsTo(Crop);
+        FarmCrop.belongsTo(Farm);
 
         this.models.RuralProducer = RuralProducer;
         this.models.Farm = Farm;
@@ -92,6 +95,14 @@ export class SQLiteDatabaseHelper implements Database {
         }, {
             where: { ...filter },
         });
+    }
+
+    async count(model: Models, options: CountOptions) {
+        return this.models[model]?.count(options);
+    }
+
+    async sum(model: Models, field: string) {
+        return this.models[model]?.sum(field);
     }
 }
 

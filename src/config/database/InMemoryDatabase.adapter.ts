@@ -60,6 +60,10 @@ export class InMemoryDatabase implements Database {
     }
 
     findAll(model: Models, filter: any) {
+        if (!filter.where) {
+            return this.database[model];
+        }
+
         const [key] = Object.keys(filter.where);
 
         return this.database[model].filter(item => item[key] == filter.where[key]);
@@ -91,6 +95,19 @@ export class InMemoryDatabase implements Database {
         if (index >= 0 && index < this.database[model].length) {
             this.database[model].splice(index, 1);
         }
+    }
+
+    count(model: Models) {
+        return this.database[model].length;
+    }
+
+    sum(model: Models, field: string) {
+        const initialValue = 0;
+
+        return this.database[model]?.reduce(
+            (accumulator, current) => accumulator + current[field],
+            initialValue,
+        )
     }
 
     private findIndexByProperty(array, key, value) {
