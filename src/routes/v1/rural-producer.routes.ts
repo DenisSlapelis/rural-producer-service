@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { makeCreateRuralProducerController, makeDeleteRuralProducerController, makeGetRuralProducerByIdController } from 'src/factories/rural-producer.factory';
+import { makeCreateRuralProducerController, makeDeleteRuralProducerController, makeGetRuralProducerByIdController } from '../../factories/rural-producer.factory';
 
 export const ruralProducerRoutes = Router();
 

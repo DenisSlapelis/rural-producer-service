@@ -1,6 +1,6 @@
 import { CreateFarmDTO } from '@dtos/farm.dto';
 import { database } from '@env';
-import { FarmRepository } from 'src/interfaces/farm-repository.interface';
+import { FarmRepository } from '../../interfaces/farm-repository.interface';
 import _ from 'lodash';
 import { Crop } from '@entities/crop.entity';
 import { CropRepository } from '@interfaces/crop-repository.interface';

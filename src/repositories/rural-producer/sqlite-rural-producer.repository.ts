@@ -1,6 +1,6 @@
 import { CreateRuralProducerModelDTO } from '@dtos/rural-producer.dto';
 import {  database } from '@env';
-import { RuralProducerRepository } from 'src/interfaces/rural-producer-repository.interface';
+import { RuralProducerRepository } from '../../interfaces/rural-producer-repository.interface';
 import { injectable } from "tsyringe";
 
 @injectable()

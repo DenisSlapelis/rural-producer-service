@@ -2,7 +2,7 @@ import { GetFarmByIdUseCaseResponse } from '@dtos/farm.dto';
 import { Crop } from '@entities/crop.entity';
 import { Farm } from '@entities/farm.entity';
 import { FarmRepository } from '@interfaces/farm-repository.interface';
-import { FarmDB } from 'src/config/database/models/sequelize-farm.model';
+import { FarmDB } from '../../config/database/models/sequelize-farm.model';
 import { injectable } from "tsyringe";
 
 @injectable()
