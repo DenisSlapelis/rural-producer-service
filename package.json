@@ -4,10 +4,11 @@
   "description": "Microservice to Create, Read, Update and Delete Rural Producers.",
   "main": "dist/index.js",
   "scripts": {
-    "prestart": "npm run build",
+    "prestart": "npm run build && npx sequelize-cli db:migrate",
     "start": "node -r ts-node/register/transpile-only -r tsconfig-paths/register .",
     "build": "tsc --p tsconfig.build.json",
     "pretty-quick": "npx pretty-quick --staged --verbose --pattern \"**/*.*(js|ts|json)\"",
+    "prestart:dev": "npx sequelize-cli db:migrate",
     "start:dev": "ts-node-dev -r tsconfig-paths/register --respawn --transpile-only --ignore-watch node_modules src/index.ts --trace-warnings",
     "test": "jest --verbose",
     "test:coverage": "jest --coverage",

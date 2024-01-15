@@ -6,12 +6,17 @@ import { Farm } from '@entities/farm.entity';
 import { CreateFarmUseCase } from '@useCases/farm/create-farm.use-case';
 import { InMemoryRuralProducerRepository } from '@repositories/rural-producer/inmemory-rural-producer.repository';
 import { InMemoryFarmRepository } from '@repositories/farm/inmemory-farm.repository';
+import { CreateFarmCropUseCase } from '@useCases/farm/create-farm-crop.use-case';
+import { InMemoryCropRepository } from '@repositories/crop/inmemory-crop.repository';
+import { Crop } from '@entities/crop.entity';
 
 describe('Create rural producer use case', () => {
     let repository: InMemoryRuralProducerRepository;
     let farmRepository: InMemoryFarmRepository;
+    let cropsRepository: InMemoryCropRepository;
     let useCase: CreateRuralProducerUseCase;
     let createFarmUseCase: CreateFarmUseCase;
+    let createFarmCropUseCase: CreateFarmCropUseCase;
     let farm: Farm;
 
     beforeAll(async () => {
@@ -22,13 +27,16 @@ describe('Create rural producer use case', () => {
             agriculturalArea: 10,
             vegetationArea: 10,
             totalArea: 20,
+            crops: [new Crop("Milho"), new Crop("Soja")],
         });
     });
 
     beforeEach(() => {
         repository = new InMemoryRuralProducerRepository();
         farmRepository = new InMemoryFarmRepository();
-        createFarmUseCase = new CreateFarmUseCase(farmRepository);
+        cropsRepository = new InMemoryCropRepository();
+        createFarmCropUseCase = new CreateFarmCropUseCase(farmRepository, cropsRepository);
+        createFarmUseCase = new CreateFarmUseCase(farmRepository, createFarmCropUseCase);
         useCase = new CreateRuralProducerUseCase(repository, createFarmUseCase);
     });
 
@@ -44,6 +52,7 @@ describe('Create rural producer use case', () => {
                     agriculturalArea: farm.agriculturalArea,
                     vegetationArea: farm.vegetationArea,
                     totalArea: farm.totalArea.value,
+                    crops: [new Crop("Milho"), new Crop("Soja")],
                 },
             });
 
@@ -64,6 +73,7 @@ describe('Create rural producer use case', () => {
                     agriculturalArea: farm.agriculturalArea,
                     vegetationArea: farm.vegetationArea,
                     totalArea: farm.totalArea.value,
+                    crops: [new Crop("Milho"), new Crop("Soja")],
                 },
             });
 
@@ -88,6 +98,7 @@ describe('Create rural producer use case', () => {
                     agriculturalArea: farm.agriculturalArea,
                     vegetationArea: farm.vegetationArea,
                     totalArea: farm.totalArea.value,
+                    crops: [new Crop("Milho"), new Crop("Soja")],
                 },
             });
 
@@ -103,6 +114,7 @@ describe('Create rural producer use case', () => {
                     agriculturalArea: 10,
                     vegetationArea: 10,
                     totalArea: 20,
+                    crops: ["Milho", "Soja"],
                 }
             });
 
@@ -116,6 +128,7 @@ describe('Create rural producer use case', () => {
                     agriculturalArea: farm.agriculturalArea,
                     vegetationArea: farm.vegetationArea,
                     totalArea: farm.totalArea.value,
+                    crops: [new Crop("Milho"), new Crop("Soja")],
                 },
             });
 
@@ -130,7 +143,8 @@ describe('Create rural producer use case', () => {
                     state: "Farm State",
                     agriculturalArea: 10,
                     vegetationArea: 10,
-                    totalArea: 20
+                    totalArea: 20,
+                    crops: ["Milho", "Soja"],
                 }
             });
         });
@@ -154,6 +168,7 @@ describe('Create rural producer use case', () => {
                     agriculturalArea: farm.agriculturalArea,
                     vegetationArea: farm.vegetationArea,
                     totalArea: farm.totalArea.value,
+                    crops: [new Crop("Milho"), new Crop("Soja")],
                 },
                 createdBy: 1,
             };
@@ -171,7 +186,8 @@ describe('Create rural producer use case', () => {
                     state: "Farm State",
                     agriculturalArea: 10,
                     vegetationArea: 10,
-                    totalArea: 20
+                    totalArea: 20,
+                    crops: ["Milho", "Soja"],
                 }
             });
         });
@@ -188,6 +204,7 @@ describe('Create rural producer use case', () => {
                     agriculturalArea: farm.agriculturalArea,
                     vegetationArea: farm.vegetationArea,
                     totalArea: farm.totalArea.value,
+                    crops: [new Crop("Milho"), new Crop("Soja")],
                 },
             };
 
@@ -208,6 +225,7 @@ describe('Create rural producer use case', () => {
                     agriculturalArea: farm.agriculturalArea,
                     vegetationArea: farm.vegetationArea,
                     totalArea: farm.totalArea.value,
+                    crops: [new Crop("Milho"), new Crop("Soja")],
                 },
             };
 

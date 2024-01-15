@@ -1,5 +1,6 @@
 import { CreateFarmDTO } from "@dtos/farm.dto";
 import { TotalArea } from "./value-objects/total-area.value-object";
+import { Crop } from "./crop.entity";
 
 export class Farm {
     readonly name: string;
@@ -8,7 +9,7 @@ export class Farm {
     readonly agriculturalArea: number;
     readonly vegetationArea: number;
     readonly totalArea: TotalArea;
-    // crops: Crop[];
+    readonly crops: Crop[];
 
     constructor(params: CreateFarmDTO) {
         const { agriculturalArea, vegetationArea, totalArea } = params;
@@ -18,5 +19,6 @@ export class Farm {
         this.agriculturalArea = agriculturalArea;
         this.vegetationArea = vegetationArea;
         this.totalArea = TotalArea.create(agriculturalArea, vegetationArea, totalArea);
+        this.crops = params.crops;
     }
 }

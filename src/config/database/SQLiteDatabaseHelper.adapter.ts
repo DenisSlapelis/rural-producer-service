@@ -4,6 +4,8 @@ import * as logger from '@logger';
 import { RuralProducerDB, RuralProducerDBProps } from "./models/sequelize-rural-producer.model";
 import { Database, Models } from "@interfaces/database.interface";
 import { FarmDB, FarmDBProps } from "./models/sequelize-farm.model";
+import { CropDB, CropDBProps } from "./models/sequelize-crop.model";
+import { FarmCropDB, FarmCropDBProps } from "./models/sequelize-farm-crop.model";
 
 @singleton()
 export class SQLiteDatabaseHelper implements Database {
@@ -19,15 +21,21 @@ export class SQLiteDatabaseHelper implements Database {
         this.models = {
             RuralProducer: null,
             Farm: null,
+            Crop: null,
+            FarmCrop: null,
         };
     }
 
     private initModels() {
         const RuralProducer = this.database.define<RuralProducerDB>('RuralProducer', RuralProducerDBProps, { tableName: 'rural_producers', paranoid: true, underscored: true });
         const Farm = this.database.define<FarmDB>('Farm', FarmDBProps, { tableName: 'farms', paranoid: true, underscored: true });
+        const Crop = this.database.define<CropDB>('Crop', CropDBProps, { tableName: 'crops', paranoid: true, underscored: true });
+        const FarmCrop = this.database.define<FarmCropDB>('FarmCrop', FarmCropDBProps, { tableName: 'farm_crops', paranoid: true, underscored: true });
 
         this.models.RuralProducer = RuralProducer;
         this.models.Farm = Farm;
+        this.models.Crop = Crop;
+        this.models.FarmCrop = FarmCrop;
     }
 
     connect = async () => {
@@ -53,9 +61,9 @@ export class SQLiteDatabaseHelper implements Database {
     }
 
     async findAll(model: Models, options: any) {
-        const result = await this.models[model]?.findAll(options);
+        const results = await this.models[model]?.findAll(options);
 
-        return result;
+        return results?.map(result => result.dataValues) || [];
     }
 
     async findOne(model: Models, options: any) {

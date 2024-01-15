@@ -49,6 +49,7 @@ export class CreateRuralProducerUseCase {
                 agriculturalArea: instance.farm.agriculturalArea,
                 vegetationArea: instance.farm.vegetationArea,
                 totalArea: instance.farm.totalArea.value,
+                crops: instance.farm.crops.map(crop => crop?.name?.value || crop),
             },
         }
     }

@@ -9,6 +9,27 @@ export class InMemoryDatabase implements Database {
         this.database = {
             RuralProducer: [],
             Farm: [],
+            Crop: [{
+                name: 'Soja',
+                id: 1,
+            },
+            {
+                name: 'Milho',
+                id: 2,
+            },
+            {
+                name: 'Algodão',
+                id: 3,
+            },
+            {
+                name: 'Café',
+                id: 4,
+            },
+            {
+                name: 'Cana de Açucar',
+                id: 5,
+            },],
+            FarmCrop: [],
         };
     }
 
@@ -38,8 +59,10 @@ export class InMemoryDatabase implements Database {
         return obj;
     }
 
-    findAll(model: Models, options: any) {
-        throw new Error('Method not implemented.');
+    findAll(model: Models, filter: any) {
+        const [key] = Object.keys(filter.where);
+
+        return this.database[model].filter(item => item[key] == filter.where[key]);
     }
 
     findOne(model: Models, filter: any) {

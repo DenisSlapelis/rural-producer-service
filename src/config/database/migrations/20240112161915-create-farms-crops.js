@@ -4,7 +4,7 @@ const { DataTypes } = require('sequelize');
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
     async up(queryInterface, Sequelize) {
-        await queryInterface.createTable('farms_crops', {
+        return queryInterface.createTable('farms_crops', {
             id: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
@@ -28,10 +28,6 @@ module.exports = {
                     model: 'crops',
                     key: 'id',
                 },
-            },
-            name: {
-                type: DataTypes.STRING,
-                allowNull: false,
             },
             createdAt: {
                 type: DataTypes.DATE,
@@ -64,34 +60,6 @@ module.exports = {
                 field: 'deleted_by',
             },
         });
-
-        return queryInterface.bulkInsert('crops', [
-            {
-                name: 'Soja',
-                created_at: new Date(),
-                created_by: 1,
-            },
-            {
-                name: 'Milho',
-                created_at: new Date(),
-                created_by: 1,
-            },
-            {
-                name: 'Algodão',
-                created_at: new Date(),
-                created_by: 1,
-            },
-            {
-                name: 'Café',
-                created_at: new Date(),
-                created_by: 1,
-            },
-            {
-                name: 'Cana de Açucar',
-                created_at: new Date(),
-                created_by: 1,
-            },
-        ]);
     },
 
     async down(queryInterface, Sequelize) {

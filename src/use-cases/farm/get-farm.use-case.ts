@@ -1,4 +1,5 @@
 import { GetFarmByIdUseCaseResponse } from '@dtos/farm.dto';
+import { Crop } from '@entities/crop.entity';
 import { Farm } from '@entities/farm.entity';
 import { FarmRepository } from '@interfaces/farm-repository.interface';
 import { FarmDB } from 'src/config/database/models/sequelize-farm.model';
@@ -14,11 +15,13 @@ export class GetFarmUseCase {
 
         if (!result) throw new Error(`No Farms found with id ${id}`, { cause: 'Not Found' });
 
-        return this.toResponseFormat(result);
+        const crops = await this.repository.getCrops(id);
+
+        return this.toResponseFormat(result, crops);
     }
 
-    private toResponseFormat(result: FarmDB): GetFarmByIdUseCaseResponse {
-        const instance = new Farm(result);
+    private toResponseFormat(result: FarmDB, crops: Crop[]): GetFarmByIdUseCaseResponse {
+        const instance = new Farm({ ...result, crops });
 
         return {
             id: result.id,
@@ -28,6 +31,7 @@ export class GetFarmUseCase {
             agriculturalArea: instance.agriculturalArea,
             vegetationArea: instance.vegetationArea,
             totalArea: instance.totalArea.value,
+            crops: crops.map(crop => crop.name.value),
         }
     }
 }

@@ -1,3 +1,4 @@
+import { Crop } from "@entities/crop.entity";
 import { CreateDTO } from "./generic.dto";
 
 export interface CreateFarmDTO {
@@ -7,6 +8,7 @@ export interface CreateFarmDTO {
     agriculturalArea: number;
     vegetationArea: number;
     totalArea: number;
+    crops: Crop[];
 }
 
 export interface CreateFarmModelDTO extends CreateFarmDTO, CreateDTO { };
@@ -19,4 +21,5 @@ export interface GetFarmByIdUseCaseResponse {
     agriculturalArea: number;
     vegetationArea: number;
     totalArea: number;
+    crops: string[];
 }
