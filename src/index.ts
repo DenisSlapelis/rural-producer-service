@@ -11,13 +11,6 @@ const main = async () => {
     await env.populateAllEnvs();
     await database.connect();
 
-    // {
-    //     databaseName: env.getValue('DATABASE_NAME'),
-    //     host: env.getValue('DATABASE_HOST'),
-    //     password: env.getValue('DATABASE_PASSWORD'),
-    //     user: env.getValue('DATABASE_USER'),
-    // }
-
     startServer(app, env.getValue('PORT'));
 }
 

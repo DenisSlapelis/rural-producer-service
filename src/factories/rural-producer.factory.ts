@@ -6,6 +6,8 @@ import { CreateRuralProducerUseCase } from "@useCases/rural-producer/create-rura
 import { DeleteRuralProducerUseCase } from "@useCases/rural-producer/delete-rural-producer.use-case";
 import { GetRuralProducerByIdUseCase } from "@useCases/rural-producer/get-rural-producer-by-id.use-case";
 import { makeCreateFarmUseCase, makeGetFarmUseCase } from "./farm.factory";
+import { UpdateRuralProducerController } from "@controllers/rural-producer/update-rural-producer.controller";
+import { UpdateRuralProducerUseCase } from "@useCases/rural-producer/update-rural-producer.use-case";
 
 // Controllers
 export const makeCreateRuralProducerController = (): CreateRuralProducerController => {
@@ -24,6 +26,12 @@ export const makeDeleteRuralProducerController = (): DeleteRuralProducerControll
     const useCase = makeDeleteRuralProducerUseCase();
 
     return new DeleteRuralProducerController(useCase);
+}
+
+export const makeUpdateRuralProducerController = (): UpdateRuralProducerController => {
+    const useCase = makeUpdateRuralProducerUseCase();
+
+    return new UpdateRuralProducerController(useCase);
 }
 
 // Use Cases
@@ -46,4 +54,11 @@ export const makeDeleteRuralProducerUseCase = () => {
     const getUseCase = makeGetRuralProducerByIdUseCase();
 
     return new DeleteRuralProducerUseCase(repository, getUseCase);
+}
+
+export const makeUpdateRuralProducerUseCase = () => {
+    const repository = new SQLiteRuralProducerRepository();
+    const getUseCase = makeGetRuralProducerByIdUseCase();
+
+    return new UpdateRuralProducerUseCase(repository, getUseCase);
 }
