@@ -4,7 +4,7 @@ import { GetRuralProducerByIdUseCase } from './get-rural-producer-by-id.use-case
 export class DeleteRuralProducerUseCase {
     constructor(
         private repository: RuralProducerRepository,
-        private geByIdUseCase: GetRuralProducerByIdUseCase
+        private getByIdUseCase: GetRuralProducerByIdUseCase
     ) {
     }
 
@@ -15,6 +15,6 @@ export class DeleteRuralProducerUseCase {
     }
 
     private async checkIfExists(id: number) {
-        await this.geByIdUseCase.getById(id);
+        await this.getByIdUseCase.getById(id);
     }
 }
