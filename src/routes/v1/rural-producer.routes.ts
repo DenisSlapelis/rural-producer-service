@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { makeCreateRuralProducerController, makeDeleteRuralProducerController, makeGetRuralProducerByIdController } from '../../factories/rural-producer.factory';
+import { makeCreateRuralProducerController, makeDeleteRuralProducerController, makeGetRuralProducerByIdController, makeUpdateRuralProducerController } from '../../factories/rural-producer.factory';
 
 export const ruralProducerRoutes = Router();
 
@@ -11,7 +11,7 @@ ruralProducerRoutes.post('/', makeCreateRuralProducerController().handle);
 ruralProducerRoutes.get('/:id', makeGetRuralProducerByIdController().handle);
 
 // // ** PUT **
-// ruralProducerRoutes.put('/:id', controller.update);
+ruralProducerRoutes.put('/:id', makeUpdateRuralProducerController().handle);
 
 // // ** DELETE **
 ruralProducerRoutes.delete('/:id', makeDeleteRuralProducerController().handle);

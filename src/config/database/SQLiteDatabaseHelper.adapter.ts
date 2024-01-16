@@ -85,12 +85,16 @@ export class SQLiteDatabaseHelper implements Database {
         return this.models[model]?.findByPk(id);
     }
 
-    async update(model: Models, params: any) {
-        throw new Error('Method not implemented.');
+    async update(model: Models, newValues: any, filter: any) {
+        return this.models[model]?.update({
+            ...newValues,
+            updatedAt: new Date(),
+        }, filter);
     }
 
     async delete(model: Models, newValues: any, filter: any) {
         return this.models[model]?.update({
+            ...newValues,
             deletedAt: new Date(),
         }, {
             where: { ...filter },

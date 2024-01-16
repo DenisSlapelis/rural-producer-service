@@ -16,6 +16,11 @@ export interface CreateRuralProducerModelDTO extends CreateDTO {
     farmId: number;
 };
 
+export interface UpdateRuralProducerDTO {
+    document: string;
+    name: string;
+};
+
 export interface GetRuralProducerByIdUseCaseResponse {
     id: number;
     document: string;

@@ -1,5 +1,5 @@
-import { CreateRuralProducerModelDTO } from '@dtos/rural-producer.dto';
-import {  database } from '@env';
+import { CreateRuralProducerModelDTO, UpdateRuralProducerDTO } from '@dtos/rural-producer.dto';
+import { database } from '@env';
 import { RuralProducerRepository } from '../../interfaces/rural-producer-repository.interface';
 import { injectable } from "tsyringe";
 
@@ -27,8 +27,18 @@ export class SQLiteRuralProducerRepository implements RuralProducerRepository {
         return database.findById('RuralProducer', id);
     }
 
-    update() {
-        throw new Error('Method not implemented.');
+    update(id: number, fields: UpdateRuralProducerDTO, updatedBy: number) {
+        const newValues = {
+            document: fields.document,
+            name: fields.name,
+            updatedBy
+        }
+
+        const where = {
+            where: { id, deletedAt: null }
+        };
+
+        return database.update('RuralProducer', newValues, where);
     }
 
     delete(id: number, deletedBy: number) {
