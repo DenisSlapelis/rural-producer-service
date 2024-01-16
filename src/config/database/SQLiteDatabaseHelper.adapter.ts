@@ -6,18 +6,15 @@ import { Database, Models } from "@interfaces/database.interface";
 import { FarmDB, FarmDBProps } from "./models/sequelize-farm.model";
 import { CropDB, CropDBProps } from "./models/sequelize-crop.model";
 import { FarmCropDB, FarmCropDBProps } from "./models/sequelize-farm-crop.model";
+import { env } from "@env";
 
 @singleton()
 export class SQLiteDatabaseHelper implements Database {
-    private database: Sequelize;
+    database: Sequelize;
     private readonly models: Record<Models, ModelStatic<any> | null>;
 
     constructor() {
-        this.database = new Sequelize({
-            dialect: 'sqlite',
-            storage: './src/config/database/rural_producer_db.sqlite',
-            logging: console.log,
-        });
+        this.database = new Sequelize({dialect: 'postgres'});
         this.models = {
             RuralProducer: null,
             Farm: null,
@@ -41,13 +38,35 @@ export class SQLiteDatabaseHelper implements Database {
         this.models.FarmCrop = FarmCrop;
     }
 
-    connect = async () => {
-        this.initModels();
+    connect = async (params?: any) => {
+        const { host, databaseName, user, password } = params;
 
-        await this.database.sync();
+        if (env.getValue('APPLICATION_ENVIRONMENT') == 'local') return this.setupLocalDatabase();
+
+        if (!host || !databaseName || !user || !password)
+            throw `Invalid database configs: host: ${host} | databaseName: ${databaseName} | user: ${user} | password: ${password}`;
+
+        this.database = new Sequelize(databaseName, user, password, {
+            dialect: 'postgres',
+            host: host,
+            dialectOptions: {
+                ssl: {
+                    rejectUnauthorized: false
+                }
+            },
+            logging: env.getValue('DATABASE_LOGGING_QUERIES') == 'true' ? logger.debug : false,
+        });
+
+        this.initModels();
 
         await this.authenticate();
     };
+
+    private async setupLocalDatabase() {
+        this.initModels();
+
+        await this.database.sync();
+    }
 
     authenticate = async () => {
         await this.database.authenticate().catch(err => {

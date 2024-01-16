@@ -19,6 +19,7 @@ export class SQLiteDashboardRepository implements DashboardRepository {
     }
 
     async getFarmsGroupedByState() {
+        // FIXME Sequelize error using Sequelize.fn()
         return database.findAll('Farm', {
             attributes: [
                 'state',
@@ -29,11 +30,12 @@ export class SQLiteDashboardRepository implements DashboardRepository {
     }
 
     async getDataGroupedByCrops() {
+        // FIXME Sequelize error using Sequelize.fn()
         const result = await database.findAll('FarmCrop', {
             attributes: [
                 [Sequelize.fn('COUNT', Sequelize.col('FarmCrop.farm_id')), 'total'],
             ],
-            group: 'FarmCrop.crop_id',
+            group: ['FarmCrop.crop_id', 'Crop.id'],
             include: 'Crop'
         });
 
