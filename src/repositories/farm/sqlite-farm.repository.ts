@@ -43,7 +43,7 @@ export class SQLiteFarmRepository implements FarmRepository {
         ]);
 
         const crops = farmCrops.map(crop => {
-            const findCrop = allCrops.find(_crop => crop.id == _crop.id);
+            const findCrop = allCrops.find(_crop => crop.cropId == _crop.id);
 
             return findCrop.name;
         });
